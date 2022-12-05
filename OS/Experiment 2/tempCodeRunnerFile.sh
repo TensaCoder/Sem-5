@@ -1,0 +1,1 @@
+echo "The number of processes running on the system is : " $(ps -e | wc -l)
