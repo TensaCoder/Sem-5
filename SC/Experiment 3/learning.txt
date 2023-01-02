@@ -1,0 +1,47 @@
+import numpy as np
+
+def sgn (x):
+    if x>=0:
+        return 1
+    else:
+        return -1
+
+def learning(w, x, d, alpha):
+    wNew=[]
+    oiList=[]
+    while oiList != d:
+        oiList=[]
+        for i in range(len(x)):
+            net = w[0]*x[i][0] + w[1]*x[i][1] + w[2]*x[i][2]
+            oi= sgn(net)
+            
+            if d[i] != oi:
+                r=d[i]-oi
+                wDeltaVal = alpha * r
+                wDelta =[
+                    wDeltaVal*x[i][0],
+                    wDeltaVal*x[i][1],
+                    wDeltaVal*x[i][2]
+                ]
+                w = [
+                    w[0] + wDelta[0],
+                    w[1] + wDelta[1],
+                    w[2] + wDelta[2]
+                ]
+            oiList.append(oi)
+            print("oi list : ", oiList)
+            # print("w{} list : {}".format(i+1, w))
+        # print(\"nNew list : \", wNew)
+        
+        
+    
+    return wNew, oiList
+
+alpha = 1
+w=[1, 1, 1]
+x=[[1, -1, -1], [1, -1, 1], [1, 1, -1], [1, 1, 1]]
+d=[-1, -1, -1, 1]
+
+wFinal, oiList = learning(w, x, d, alpha)
+print("Weights : ", wFinal)
+print("Output : ", oiList)
